@@ -168,11 +168,26 @@ namespace GroupCSharp
                     item = ToDelete();
                     if (queue.Contains(item))
                     {
+                        Queue<string> qHoldQue = new Queue<string>();
 
+                        while (queue.Count > 0) 
+                        {
+                            if (queue.Peek() == item)
+                            {
+                                queue.Dequeue();
+                                break;
+                            }
+                            qHoldQue.Enqueue(queue.Dequeue());
+                        }
+                        
+                        while(qHoldQue.Count > 0)
+                        {
+                            queue.Enqueue(qHoldQue.Dequeue());                           
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("Your queue does not contain that item!!");
+                        Console.WriteLine("Your queue does not contain that item!!\n");
                     }
                     break;
                 case 5:
